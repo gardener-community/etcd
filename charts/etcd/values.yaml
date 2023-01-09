@@ -16,7 +16,7 @@ name: etcd
 replicas: 1
 
 images:
-  etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.4.13-bootstrap
+  etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.5.2
   etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.21.0
 
 backup:
