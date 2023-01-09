@@ -6,7 +6,7 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "^values.yaml$"
+        "^etcd/charts/etcd/values.yaml$"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver-coerced",
