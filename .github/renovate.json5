@@ -1,0 +1,9 @@
+{
+  "automerge": "true",
+  "platformAutomerge": "true",
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 1,
+  "enabledManagers": ["helm-values"],
+  "prCreation": "immediate",
+  "semanticCommits": "disabled",
+}
