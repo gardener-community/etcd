@@ -3,7 +3,24 @@
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
-  "enabledManagers": ["helm-values"],
-  "prCreation": "immediate",
-  "semanticCommits": "disabled",
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^values.yaml$"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver-coerced",
+      "matchStrings": [
+        // https://regex101.com/r/oimJd1/1
+        "(?<depName>eu\\.gcr\\.io\\/gardener-project\\/gardener\\/etcd):(?<currentValue>v[0-9.a-z-]+)",
+        "(?<depName>eu\\.gcr\\.io\\/gardener-project\\/gardener\\/etcdbrctl):(?<currentValue>v[0-9.a-z-]+)"
+      ]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "includeForks": true,
+  "enabledManagers": ["regex"],
+  "prCreation": "immediate"
 }
