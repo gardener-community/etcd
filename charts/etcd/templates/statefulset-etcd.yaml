@@ -130,10 +130,14 @@ spec:
         env:
         - name: STORAGE_CONTAINER
           value: {{ .Values.backup.storageContainer }}
+        - name: ETCD_CONF
+          value: "/bootstrap/etcd.conf.yml"
 {{- if .Values.backup.env }}
 {{ toYaml .Values.backup.env | indent 8 }}
 {{- end }}
         volumeMounts:
+        - name: etcd-bootstrap
+          mountPath: /bootstrap
         - name: {{ .Values.name }}
           mountPath: /var/etcd/data
         - name: ca-etcd

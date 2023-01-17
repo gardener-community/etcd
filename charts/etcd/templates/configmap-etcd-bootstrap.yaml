@@ -79,6 +79,9 @@ data:
       # Initial cluster token for the etcd cluster during bootstrap.
       initial-cluster-token: 'new'
 
+      # Needed for etcdbrctl >= 0.17.0
+      initial-cluster: 'etcd=http://localhost:2380'
+
       # Initial cluster state ('new' or 'existing').
       initial-cluster-state: 'new'
 

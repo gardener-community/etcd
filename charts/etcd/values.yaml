@@ -17,7 +17,7 @@ replicas: 1
 
 images:
   etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.5.2
-  etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.21.0
+  etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.17.0
 
 backup:
   schedule: "0 */24 * * *" # cron standard schedule
