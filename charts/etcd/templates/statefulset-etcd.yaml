@@ -52,9 +52,18 @@ spec:
         command:
         - /bootstrap/bootstrap.sh
         readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
+          exec:
+            command:
+            - /bin/sh
+            - -ec
+            - ETCDCTL_API=3
+            - etcdctl
+            - --cert=/var/etcd/ssl/client/tls.crt
+            - --key=/var/etcd/ssl/client/tls.key
+            - --cacert=/var/etcd/ssl/ca/ca.crt
+            - --endpoints=https://{{ .Values.name }}-0:2379
+            - get
+            - foo
           initialDelaySeconds: 15
           periodSeconds: 5
         livenessProbe:
@@ -132,6 +141,10 @@ spec:
           value: {{ .Values.backup.storageContainer }}
         - name: ETCD_CONF
           value: "/bootstrap/etcd.conf.yml"
+        - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
 {{- if .Values.backup.env }}
 {{ toYaml .Values.backup.env | indent 8 }}
 {{- end }}
