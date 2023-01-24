@@ -142,9 +142,9 @@ spec:
         - name: ETCD_CONF
           value: "/bootstrap/etcd.conf.yml"
         - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
 {{- if .Values.backup.env }}
 {{ toYaml .Values.backup.env | indent 8 }}
 {{- end }}
