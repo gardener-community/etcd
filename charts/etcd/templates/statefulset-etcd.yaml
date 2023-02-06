@@ -25,7 +25,7 @@ spec:
   updateStrategy:
     type: RollingUpdate
   serviceName: garden-etcd-{{.Values.role}}-client
-  replicas: {{ .Values.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.name }}
@@ -121,6 +121,7 @@ spec:
         - --insecure-transport=false
         - --insecure-skip-tls-verify=false
         - --endpoints=https://{{ .Values.name }}-0:2379
+        - --service-endpoints=https://{{ .Values.name }}-0:2379
         - --etcd-connection-timeout=300s
         - --delta-snapshot-period=300s
         image: {{ index .Values.images "etcd-backup-restore" }}
@@ -145,9 +146,20 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-{{- if .Values.backup.env }}
-{{ toYaml .Values.backup.env | indent 8 }}
-{{- end }}
+        {{- if .Values.backup.storageProvider }}
+        {{- if eq .Values.backup.storageProvider "ABS" }}
+        - name: AZURE_APPLICATION_CREDENTIALS
+          value: /root/etcd-backup
+        {{- end }}
+        {{- if eq .Values.backup.storageProvider "S3" }}
+        - name: AWS_APPLICATION_CREDENTIALS
+          value: /root/etcd-backup
+        {{- end }}
+        {{- if eq .Values.backup.storageProvider "Swift" }}
+        - name: OPENSTACK_APPLICATION_CREDENTIALS
+          value: /root/etcd-backup
+        {{- end }}
+        {{- end }}
         volumeMounts:
         - name: etcd-bootstrap
           mountPath: /bootstrap
@@ -157,6 +169,10 @@ spec:
           mountPath: /var/etcd/ssl/ca
         - name: etcd-client-tls
           mountPath: /var/etcd/ssl/client
+{{- if .Values.backup.storageProvider }}
+        - name: {{ .Values.name }}-backup
+          mountPath: /root/etcd-backup/
+{{- end}}
 {{- if .Values.backup.volumeMounts }}
 {{ toYaml .Values.backup.volumeMounts | indent 8 }}
 {{- end }}
@@ -175,7 +191,7 @@ spec:
         secret:
           secretName: {{ .Values.name }}-ca
 {{- if .Values.backup.storageProvider }}
-      - name: etcd-backup
+      - name: {{ .Values.name }}-backup
         secret:
           secretName: {{ .Values.name }}-backup
 {{- if .Values.backup.secretItems }}
