@@ -25,6 +25,7 @@ backup:
   secretData: {}
   storageContainer: ""
   volumeMounts: []
+# storePrefix: "custom-prefix"
 
 tls:
   ca:
