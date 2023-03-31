@@ -27,6 +27,7 @@ backup:
   storageContainer: ""
   env: []         # Follow comments below
   volumeMounts: []
+# storePrefix: "custom-prefix"
 
 tls:
   ca:
