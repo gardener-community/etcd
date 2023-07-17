@@ -26,10 +26,12 @@ backup:
   storageContainer: ""
   volumeMounts: []
 # storePrefix: "custom-prefix"
+  env: [] # allows setting custom env vars
 
 tls:
   ca:
     crt: ca-certificate
+    key: ca-key
   server:
     crt: server-certificate
     key: server-key
