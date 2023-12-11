@@ -96,7 +96,7 @@ spec:
             cpu: {{ .Values.resources.limits.cpu | default "1000m" }}
             memory: {{ .Values.resources.limits.memory | default "2560Mi" }}
         volumeMounts:
-        - name: {{ .Values.name }}
+        - name: virtual-garden-{{ .Values.name }}
           mountPath: /var/etcd/data
         - name: etcd-bootstrap
           mountPath: /bootstrap
@@ -174,7 +174,7 @@ spec:
         volumeMounts:
         - name: etcd-bootstrap
           mountPath: /bootstrap
-        - name: {{ .Values.name }}
+        - name: virtual-garden-{{ .Values.name }}
           mountPath: /var/etcd/data
         - name: ca-etcd
           mountPath: /var/etcd/ssl/ca
