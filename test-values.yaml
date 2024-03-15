@@ -1,0 +1,10 @@
+tls:
+  ca:
+    crt: dGVzdA==
+    key: dGVzdA==
+  server:
+    crt: dGVzdA==
+    key: dGVzdA==
+  client:
+    crt: dGVzdA==
+    key: dGVzdA==

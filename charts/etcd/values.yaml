@@ -14,9 +14,15 @@
 
 name: etcd
 
-images:
-  etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.4.26-3
-  etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.24.7
+etcd:
+  image:
+    repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd
+    tag: v3.4.26-3
+
+etcd-backup-restore:
+  image:
+    repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl
+    tag: v0.24.8
 
 backup:
   schedule: "0 */24 * * *" # cron standard schedule
