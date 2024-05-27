@@ -27,11 +27,12 @@ etcd-backup-restore:
 backup:
   schedule: "0 */24 * * *" # cron standard schedule
   maxBackups: 7 # Maximum number of backups to keep (may change in future)
-  storageProvider: ""  # Abs,Gcs,S3,Swift empty means no backup,
+  storageProvider: "" # Abs,Gcs,S3,Swift empty means no backup,
   secretData: {}
+  secretStringData: {}
   storageContainer: ""
   volumeMounts: []
-# storePrefix: "custom-prefix"
+  # storePrefix: "custom-prefix"
   env: [] # allows setting custom env vars
 
 tls:
