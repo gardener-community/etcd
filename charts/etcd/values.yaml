@@ -56,3 +56,5 @@ resources:
 volumeClaimTemplates:
   requests:
     storage: 10Gi
+
+volumeClaimNameOverride: "" # override name of volumeClaim. Defaults to `virtual-garden-{{ .Values.name }}`
